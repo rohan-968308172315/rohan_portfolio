@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohan Dhumal - Full Stack Web Developer</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Devicons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --body-bg: #ffffff;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        [data-bs-theme="dark"] {
+            --primary-color: #3498db;
+            --secondary-color: #f8f9fa;
+            --light-color: #212529;
+            --dark-color: #f8f9fa;
+            --body-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.navbar-scrolled {
+            background-color: var(--light-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            color: var(--text-color) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(44, 62, 80, 0.1) 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .typed-cursor {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 5px solid var(--primary-color);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotateY(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotateY(5deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotateY(0deg);
+            }
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+            opacity: 0.1;
+            top: -25%;
+            left: -25%;
+            z-index: -1;
+            animation: pulse 8s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.1;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 0.15;
+            }
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 10px 25px;
+            font-weight: 500;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .btn-primary:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--primary-color);
+            bottom: -10px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .section-title:hover::after {
+            width: 100%;
+        }
+
+        .about-section,
+        .skills-section,
+        .projects-section,
+        .contact-section {
+            padding: 100px 0;
+        }
+
+        .about-img img {
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .about-img img:hover {
+            transform: scale(1.02);
+        }
+
+        .about-info {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateX(5px);
+        }
+
+        .info-item strong {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .skill-item {
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateX(5px);
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .skill-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .progress-bar {
+            background-color: var(--primary-color);
+            transition: width 2s ease-in-out;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            border: none;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 20px;
+            position: relative;
+        }
+
+        .contact-form {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control {
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .map-container {
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .map-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            border: none;
+        }
+
+        footer {
+            background-color: var(--light-color);
+            padding: 30px 0;
+            margin: 50px 0 0 0;
+            text-align: center;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icons a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .social-icons a:hover::before {
+            left: 100%;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+
+        /* Floating elements animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Skill icons colors */
+        .devicon-html5-plain {
+            color: #E34F26;
+        }
+
+        .devicon-css3-plain {
+            color: #1572B6;
+        }
+
+        .devicon-bootstrap-plain {
+            color: #7952B3;
+        }
+
+        .devicon-javascript-plain {
+            color: #F7DF1E;
+        }
+
+        .devicon-react-original {
+            color: #61DAFB;
+        }
+
+        .devicon-php-plain {
+            color: #777BB4;
+        }
+
+        .devicon-codeigniter-plain {
+            color: #EF4223;
+        }
+
+        .devicon-laravel-plain {
+            color: #FF2D20;
+        }
+
+        .devicon-python-plain {
+            color: #3776AB;
+        }
+
+        .devicon-django-plain {
+            color: #092E20;
+        }
+
+        .devicon-nodejs-plain {
+            color: #339933;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .typed-cursor {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-section {
+                padding: 80px 0;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                margin-top: 30px;
+            }
+        }
+
+        /* Animation classes */
+        .animate-progress {
+            transition: width 2s ease-in-out;
+        }
+
+        /* Typed.js cursor animation */
+        .typed-cursor {
+            opacity: 1;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .toast-success {
+            background-color: var(--primary-color) !important;
+        }
+
+        .toast-error {
+            background-color: #e74c3c !important;
+        }
+
+        #contactForm .is-invalid {
+            border-color: #e74c3c;
+        }
+
+        #contactForm .invalid-feedback {
+            color: #e74c3c;
+            font-size: 0.875em;
+            margin-top: -15px;
+            margin-bottom: 10px;
+        }
+
+        .spinner-border {
+            display: none;
+        }
+
+        /* Add these styles to your CSS */
+        .submission-details {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .detail-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #495057;
+            display: inline-block;
+            width: 80px;
+        }
+
+        .detail-value {
+            color: #212529;
+        }
+
+        #submissionDetails .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #submissionDetails .card-header {
+            border-radius: 0 !important;
+        }
+
+        /* Modal styles */
+        .modal-content {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            border-radius: 0;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Rohan Dhumal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="theme-toggle nav-link" id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h6 class="text-primary">Hello, I'm</h6>
+                        <h1>Rohan Dhumal</h1>
+                        <h2 class="text-primary mb-4">I'm a <span class="typed"
+                                data-typed-items="Full Stack Developer, Web Designer, Freelancer"></span><span
+                                class="typed-cursor">|</span></h2>
+                        <p>I design and build responsive websites and web applications using modern technologies. Let's
+                            turn your ideas into reality!</p>
+                        <div class="hero-buttons d-flex">
+                            <a href="#contact" class="btn btn-primary">Contact Me</a>
+                            <!-- <a href="#" class="btn btn-outline-primary">Download CV</a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image text-center floating">
+                        <img src="/DevRohan.png" alt="Rohan Dhumal" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="section-title text-center">About <span class="text-primary">Me</span></h2>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="about-img">
+                        <img src="/About.jpg" alt="Rohan Dhumal" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="about-info">
+                        <h3>Full Stack Web Developer</h3>
+                        <p class="mb-4">I am a passionate Full Stack Web Developer with expertise in both front-end and
+                            back-end technologies. I create responsive, user-friendly websites and web applications that
+                            deliver exceptional user experiences.</p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <strong><i class="fas fa-birthday-cake me-2"></i>Birthday:</strong> 11/03/2004
+                                </div>
+                              
+                                <div class="info-item">
+                                    <strong><i class="fas fa-map-marker-alt me-2"></i>City:</strong> Jalgaon Kada
+                                    Karkhana
+                                </div>
+                                <div class="info-item">
+                                    <strong><i class="fas fa-calendar-alt me-2"></i>Age:</strong> 22
+                                </div>
+                                <div class="info-item">
+                                    <strong><i class="fas fa-graduation-cap me-2"></i>Degree:</strong> BCS
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                
+                                <div class="info-item">
+                                    <strong><i class="fas fa-user-graduate me-2"></i>Master:</strong> MCA First Year
+                                    (Current)
+                                </div>
+                                <div class="info-item">
+                                    <strong><i class="fas fa-envelope me-2"></i>Email:</strong> rohand2315@gmail.com
+                                </div>
+                                <div class="info-item">
+                                    <strong><i class="fas fa-user-tie me-2"></i>Freelance:</strong> Available
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="#" class="btn btn-primary me-3">Download CV</a>
+                            <!-- <a href="#contact" class="btn btn-outline-primary">Hire Me</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+        <div class="container">
+            <h2 class="section-title text-center">My <span class="text-primary">Skills</span></h2>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3 class="mb-4">Frontend Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span><i class="devicon-html5-plain skill-icon"></i>HTML</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar animate-progress" role="progressbar" style="width: 0%"
+                                aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" data-width="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span><i class="devicon-css3-plain skill-icon"></i>CSS</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar animate-progress" role="progressbar" style="width: 0%"
+                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span><i class="devicon-bootstrap-plain skill-icon"></i>Bootstrap</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar animate-progress" role="progressbar" style="width: 0%"
+                                aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" data-width="92"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span><i class="devicon-javascript-plain skill-icon"></i>JavaScript</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar animate-progress" role="progressbar" style="width: 0%"
+                                aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span><i class="devicon-react-original skill-icon"></i>React JS</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar animate-progress" role="progressbar" style="width: 0%"
+                                aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" data-width="80"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <h3 class="mb-4">Backend Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span><i class="devicon-php-plain skill-icon"></i>Core PHP</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar animate-progress" role="progressbar" style="width: 0%"
+                                aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" data-width="88"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span><i class="devicon-codeigniter-plain skill-icon"></i>CodeIgniter</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar animate-progress" role="progressbar" style="width: 0%"
+                                aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span><i class="devicon-laravel-plain skill-icon"></i>Laravel</span>
+                            <span>82%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar animate-progress" role="progressbar" style="width: 0%"
+                                aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" data-width="82"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span><i class="devicon-python-plain skill-icon"></i>Python Django</span>
+                            <span>78%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar animate-progress" role="progressbar" style="width: 0%"
+                                aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" data-width="78"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span><i class="devicon-nodejs-plain skill-icon"></i>Node.js</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar animate-progress" role="progressbar" style="width: 0%"
+                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" data-width="75"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+        <div class="container">
+            <h2 class="section-title text-center">My <span class="text-primary">Projects</span></h2>
+
+            <div class="row">
+                <!-- Project 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="/project1.png" alt="Project 1">
+                        </div>
+                        <div class="project-content">
+                            <h4>Rohan Construct Website</h4>
+                            <p>A fully responsive Using HTML,CSS and Bootstrap .</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="https://rohan-968308172315.github.io/rohan_construction/" target="_blank" class="btn btn-sm btn-primary">Live Demo</a>
+                                <div class="tech-used">
+                                    <span class="badge bg-secondary me-1">HTML & CSS</span>
+                                    <span class="badge bg-secondary">Bootstrap</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <!-- <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="/rohan1.jpg" alt="Project 2">
+                        </div>
+                        <div class="project-content">
+                            <h4>Portfolio CMS</h4>
+                            <p>A content management system for portfolios built with Laravel and MySQL with admin
+                                dashboard.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="btn btn-sm btn-primary">Live Demo</a>
+                                <div class="tech-used">
+                                    <span class="badge bg-secondary me-1">Laravel</span>
+                                    <span class="badge bg-secondary">MySQL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Project 3 -->
+                <!-- <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="/rohan1.jpg" alt="Project 3">
+                        </div>
+                        <div class="project-content">
+                            <h4>Task Management App</h4>
+                            <p>A task management application built with Django and React with real-time updates.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="btn btn-sm btn-primary">Live Demo</a>
+                                <div class="tech-used">
+                                    <span class="badge bg-secondary me-1">Django</span>
+                                    <span class="badge bg-secondary">React</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Project 4 -->
+                <!-- <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="/rohan1.jpg" alt="Project 4">
+                        </div>
+                        <div class="project-content">
+                            <h4>Social Media Dashboard</h4>
+                            <p>A dashboard for managing social media accounts with analytics built with CodeIgniter.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="btn btn-sm btn-primary">Live Demo</a>
+                                <div class="tech-used">
+                                    <span class="badge bg-secondary me-1">CodeIgniter</span>
+                                    <span class="badge bg-secondary">Chart.js</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Project 5 -->
+                <!-- <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="/rohan1.jpg" alt="Project 5">
+                        </div>
+                        <div class="project-content">
+                            <h4>Blog Platform</h4>
+                            <p>A blogging platform with markdown support built with Node.js and MongoDB.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="btn btn-sm btn-primary">Live Demo</a>
+                                <div class="tech-used">
+                                    <span class="badge bg-secondary me-1">Node.js</span>
+                                    <span class="badge bg-secondary">MongoDB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Project 6 -->
+                <!-- <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="/rohan1.jpg" alt="Project 6">
+                        </div>
+                        <div class="project-content">
+                            <h4>Weather App</h4>
+                            <p>A weather application with 5-day forecast using OpenWeatherMap API built with React.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="btn btn-sm btn-primary">Live Demo</a>
+                                <div class="tech-used">
+                                    <span class="badge bg-secondary me-1">React</span>
+                                    <span class="badge bg-secondary">API</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title text-center">Contact <span class="text-primary">Me</span></h2>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-form">
+                        <!-- Contact Form (Frontend Only) -->
+                        <form action="https://formsubmit.co/rohand2315@gmail.com" method="POST" id="contactForm">
+                            <!-- Honeypot (for spam prevention) -->
+                            <input type="text" name="_honey" style="display: none;">
+
+                            <!-- Disable FormSubmit Captcha -->
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_autoresponse"
+                                value="Thank you for contacting me! I'll get back to you soon.">
+                            <!-- Success Redirect (optional) -->
+                            <input type="hidden" name="_next" value="#contact">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" name="name" placeholder="Your Name"
+                                        required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="email" class="form-control" name="email" placeholder="Your Email"
+                                        required>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control mb-3" name="subject" placeholder="Subject">
+                            <input type="tel" class="form-control mb-3" name="phone" placeholder="Phone Number">
+                            <textarea class="form-control mb-3" name="message" rows="5" placeholder="Your Message"
+                                required></textarea>
+                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="map-container">
+                        <!-- <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.123456789012!2d72.12345678901234!3d19.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA3JzI0LjQiTiA3McKwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                            allowfullscreen="" loading="lazy"></iframe> -->
+
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2704.882215588442!2d74.73125607336934!3d19.101321951180758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdcb0881c7d47e9%3A0x5f4a8fc2e3ad340!2sNew%20Arts%20College%20Rd%2C%20Tarakpur%2C%20Ahmadnagar%2C%20Maharashtra%20414001!5e1!3m2!1sen!2sin!4v1748628829601!5m2!1sen!2sin" allowfullscreen="" loading="lazy" ></iframe>
+                    </div>
+
+                    <div class="contact-info mt-4">
+                        <div class="info-item">
+                            <strong><i class="fas fa-map-marker-alt me-2"></i>Location:</strong> Ahmednagar,
+                            Balikaashram Road, 4140001
+                        </div>
+                        <div class="info-item">
+                            <strong><i class="fas fa-envelope me-2"></i>Email:</strong> rohand2315@gmail.com
+                        </div>
+                       
+                    </div>
+
+                    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary text-white">
+                                    <h5 class="modal-title">Thank You!</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>I've received your message and will get back to you soon.</p>
+                                    <div class="submission-details">
+                                        <div class="detail-item">
+                                            <span class="detail-label">Name:</span>
+                                            <span class="detail-value" id="displayName"></span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="detail-label">Email:</span>
+                                            <span class="detail-value" id="displayEmail"></span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="detail-label">Phone:</span>
+                                            <span class="detail-value" id="displayPhone"></span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="detail-label">Subject:</span>
+                                            <span class="detail-value" id="displaySubject"></span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="detail-label">Message:</span>
+                                            <span class="detail-value" id="displayMessage"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-icons mb-4">
+                <a href="https://www.facebook.com/rohan.dhumal.1232" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/rohan_d_96_k/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/rohan-dhumal-4659062b0/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/rohan-968308172315" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="mb-0">&copy; 2025 Rohan Dhumal. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <style>
+        .modal-content {
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header.bg-primary {
+            background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+        }
+
+        .modal-title {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .submission-details {
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+
+        .detail-item {
+            margin-bottom: 6px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .detail-value {
+            color: #555;
+            margin-left: 5px;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-bs-theme', currentTheme);
+
+        if (currentTheme === 'dark') {
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            htmlElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            if (newTheme === 'dark') {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var typed = new Typed('.typed', {
+                strings: ['Full Stack Developer', 'Web Designer', 'Freelancer'],
+                typeSpeed: 100,
+                backSpeed: 60,
+                loop: true
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const progressBars = document.querySelectorAll('.animate-progress');
+
+            const animateProgressBars = () => {
+                progressBars.forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width + '%';
+                    bar.setAttribute('aria-valuenow', width);
+                });
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateProgressBars();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const skillsSection = document.querySelector('.skills-section');
+            if (skillsSection) {
+                observer.observe(skillsSection);
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            const name = formData.get("name");
+            const email = formData.get("email");
+            const phone = formData.get("phone");
+            const subject = formData.get("subject");
+            const message = formData.get("message");
+
+            try {
+                const response = await fetch('https://formsubmit.co/ajax/rohand2315@gmail.com', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    document.getElementById("displayName").textContent = name;
+                    document.getElementById("displayEmail").textContent = email;
+                    document.getElementById("displayPhone").textContent = phone;
+                    document.getElementById("displaySubject").textContent = subject;
+                    document.getElementById("displayMessage").textContent = message;
+
+                    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                    successModal.show();
+
+                    form.reset();
+                } else {
+                    alert("Error sending message. Please try again.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("There was an issue submitting the form.");
+            }
+        });
+    </script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+</html>
